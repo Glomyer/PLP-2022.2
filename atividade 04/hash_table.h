@@ -59,7 +59,7 @@ char *get(struct HashTable *ht, char *key) {
   return NULL;
 }
 
-void delete(struct HashTable *ht, char *key) {
+void del(struct HashTable *ht, char *key) {
   unsigned int index = hash(ht, key);
   struct Entry *entry = ht->table[index];
   struct Entry *prev = NULL;
@@ -78,17 +78,4 @@ void delete(struct HashTable *ht, char *key) {
     prev = entry;
     entry = entry->next;
   }
-}
-
-int main() {
-  struct HashTable *ht = create_hash_table();
-  set(ht, "key1", "Computação");
-  set(ht, "key2", "Python");
-  set(ht, "key3", "Nintendo");
-  printf("%s\n", get(ht, "key1"));
-  printf("%s\n", get(ht, "key2"));
-  printf("%s\n", get(ht, "key3"));
-  delete(ht, "key2");
-  printf("%s\n", get(ht, "key2"));
-  return 0;
 }

@@ -12,16 +12,12 @@ extern FILE* yyin;
 void yyerror(char *s);
 int yylex(void);
 int yyparse();
-
-double modulo(int a, int b){
-	return a%b;
-}
-
 %}
 
 %token NUMBER EOL
 %token PLUS MINUS DIVIDE TIMES
 %token P_LEFT P_RIGHT
+%token PRINT
 
 %left PLUS MINUS
 %left TIMES DIVIDE
@@ -42,9 +38,10 @@ EXPRESSION:
 	|	EXPRESSION MINUS EXPRESSION {$$ = $1 - $3;}
 	|	EXPRESSION TIMES EXPRESSION {$$ = $1 * $3;}
 	|	EXPRESSION DIVIDE EXPRESSION {$$ = $1 / $3;}
-	| EXPRESSION EXP EXPRESSION {$$=pow($1,$3);}
-	| EXPRESSION MOD EXPRESSION { $$ = modulo($1, $3); }
+	| EXPRESSION EXP EXPRESSION {$$ = pow($1,$3);}
+	| EXPRESSION MOD EXPRESSION { $$ = fmod($1, $3);}
 	|	P_LEFT EXPRESSION P_RIGHT {$$ = $2;}
+	|	PRINT P_LEFT EXPRESSION P_RIGHT {$$ = $2;}
 	;
 
 

@@ -53,8 +53,9 @@ extern int yydebug;
     TIMES = 263,
     P_LEFT = 264,
     P_RIGHT = 265,
-    EXP = 266,
-    MOD = 267
+    PRINT = 266,
+    EXP = 267,
+    MOD = 268
   };
 #endif
 

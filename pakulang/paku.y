@@ -1,8 +1,3 @@
-/*
-	Calculadora v.4 - Lê de arquivos ou linha de comando
-	Jucimar Jr
-*/
-
 %{
 #define YYSTYPE double
 #include <stdio.h>
@@ -29,7 +24,11 @@ int yyparse();
 
 STATEMENT:
 	STATEMENT EXPRESSION EOL {$$ = $2; printf("Resultado: %f\n", $2);}
-	|
+	| PRINT_STATEMENT EOL
+	;
+
+PRINT_STATEMENT:
+	| PRINT {printf("print executado\n");}
 	;
 
 EXPRESSION:
@@ -50,13 +49,13 @@ EXPRESSION:
 void yyerror(char *s)
 {
 	printf("Error: %s\n", s);
+	yyparse();
 }
 
 int main(int argc, char *argv[])
 {
 	if (argc == 1)
     {
-
 		yyparse();
     }
 

@@ -14,7 +14,7 @@ IDENTIFICADOR		[a-zA-Z][a-zA-z0-9]*
 PALAVRA					[a-zA-Z]+
 TAB							[\t]
 LINHA						[\n]
-PRINT						[print]
+
 %%
 [0-9]+("."[0-9]+)? 	{ yylval = atof(yytext); return NUMBER; }
 [\n]								{ return EOL; }
@@ -26,7 +26,7 @@ PRINT						[print]
 [%]									{ return MOD; }
 [(]									{ return P_LEFT;}
 [)]									{ return P_RIGHT;}
-{PRINT}							{ return PRINT;}
+"print"							{ return PRINT;}
 [[:space:]]					;
 .										{ yyerror("Undefined token\n"); }
 
